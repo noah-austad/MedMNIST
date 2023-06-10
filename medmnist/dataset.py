@@ -111,10 +111,9 @@ class MedMNIST2D(MedMNIST):
         if self.target_transform is not None:
             target = self.target_transform(target)
         else:
-            if target in [7, 8, 9, 10, 11, 12, 13]:
-                target = 1
-            else:
-                target = 0
+            threshold = 3
+            array_sum = np.sum(label_array) # more than 3 conditions is [1,0], less is [0,1]
+            target = [0,1] if array_sum < threshold else target = [1,0]
 
         return img, target
 
