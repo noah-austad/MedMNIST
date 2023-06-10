@@ -111,8 +111,10 @@ class MedMNIST2D(MedMNIST):
         if self.target_transform is not None:
             target = self.target_transform(target)
         else:
-            mapping = {0:0,1:0,2:0,3:0,4:0,5:0,6:1,8:1,9:1,10:1,11:1,12:0,13:1}
-            target = mapping[target]
+            if target in [7, 8, 9, 10, 11, 12, 13]:
+                target = 1
+            else:
+                target = 0
 
         return img, target
 
